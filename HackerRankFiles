@@ -1,0 +1,43 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class SolutionBin {
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        String bnNmbr = Integer.toBinaryString(n);
+        char[] bnrChr = bnNmbr.toCharArray();
+        int counter = 0;
+        int aux = 0;
+        for (int i = 0; i < bnrChr.length; i++) {
+            if (bnrChr[i] == '1') {
+                counter++;
+                if(i == bnrChr.length-1 && bnrChr[i] == '1'){
+                    if (aux < counter){
+                    aux = counter;
+                    }
+                }
+            } else {
+                
+                if (aux < counter) {
+                    aux = counter;
+                    counter = 0;
+                } else {
+                    counter = 0;
+                }
+            }
+
+        }
+        System.out.println(aux);
+
+        scanner.close();
+    }
+}
